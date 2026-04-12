@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Moto École Patricia — Lumbres, Longuenesse, Watten, Saint-Martin (62/59)</title>
+    <meta name="description" content="Auto Moto École Patricia : permis B, moto, scooter et remorque dans le Pas-de-Calais et le Nord. 4 agences, simulateur de conduite, label École Conduite Qualité.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --red: #E53935;
+            --red-dark: #C62828;
+            --blue: #42A5F5;
+            --blue-dark: #1E88E5;
+            --dark: #1a1a2e;
+            --gray: #6b7280;
+            --light: #f0f4f8;
+            --white: #ffffff;
+        }
+        body { font-family: 'Poppins', sans-serif; color: #333; line-height: 1.6; }
+        img { max-width: 100%; height: auto; }
+
+        /* NAV */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            padding: 0.5rem 2rem;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .nav-logo { height: 48px; }
+        .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none; color: var(--dark); font-weight: 500;
+            font-size: 0.9rem; transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--red); }
+        .nav-cta {
+            background: var(--red); color: var(--white); padding: 0.55rem 1.3rem;
+            border-radius: 8px; text-decoration: none; font-weight: 600;
+            font-size: 0.85rem; transition: background 0.3s;
+        }
+        .nav-cta:hover { background: var(--red-dark); }
+        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+        .hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); margin: 5px 0; transition: 0.3s; }
+
+        /* HERO */
+        .hero {
+            position: relative; min-height: 92vh; display: flex; align-items: center;
+            background: linear-gradient(135deg, var(--dark) 0%, #16213e 50%, var(--blue-dark) 100%);
+            padding: 7rem 2rem 4rem; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(229,57,53,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero::after {
+            content: ''; position: absolute; bottom: -30%; left: -10%; width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(66,165,245,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem; align-items: center; width: 100%; position: relative; z-index: 1; }
+        .hero-text { color: var(--white); }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+            padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.8rem;
+            font-weight: 500; margin-bottom: 1.2rem; border: 1px solid rgba(255,255,255,0.15);
+        }
+        .hero-badge svg { width: 16px; height: 16px; }
+        .hero h1 { font-size: 2.6rem; font-weight: 800; line-height: 1.15; margin-bottom: 1rem; }
+        .hero h1 span { color: var(--blue); }
+        .hero p { font-size: 1.05rem; opacity: 0.88; margin-bottom: 1.8rem; line-height: 1.7; }
+        .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .btn-red {
+            background: var(--red); color: var(--white); padding: 0.85rem 1.8rem;
+            border-radius: 10px; text-decoration: none; font-weight: 700;
+            font-size: 0.95rem; transition: all 0.3s; display: inline-block;
+        }
+        .btn-red:hover { background: var(--red-dark); transform: translateY(-2px); }
+        .btn-outline {
+            background: transparent; color: var(--white); padding: 0.85rem 1.8rem;
+            border-radius: 10px; text-decoration: none; font-weight: 600;
+            font-size: 0.95rem; border: 2px solid rgba(255,255,255,0.3); transition: all 0.3s;
+        }
+        .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
+        .hero-img { text-align: center; }
+        .hero-img img { max-height: 260px; filter: drop-shadow(0 15px 35px rgba(0,0,0,0.4)); }
+
+        /* STATS BAR */
+        .stats-bar {
+            background: var(--red); padding: 1.8rem 2rem;
+            display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;
+        }
+        .stat { text-align: center; color: var(--white); }
+        .stat-num { font-size: 1.8rem; font-weight: 800; }
+        .stat-label { font-size: 0.78rem; opacity: 0.85; margin-top: 0.15rem; }
+
+        /* SECTIONS */
+        section { padding: 5rem 2rem; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .section-title { text-align: center; margin-bottom: 3rem; }
+        .section-title h2 { font-size: 2.1rem; font-weight: 800; color: var(--dark); margin-bottom: 0.5rem; }
+        .section-title p { color: var(--gray); font-size: 1rem; max-width: 550px; margin: 0 auto; }
+        .accent-line { width: 50px; height: 4px; background: var(--red); border-radius: 2px; margin: 0.8rem auto 0; }
+
+        /* LABEL */
+        .label-section { background: var(--light); }
+        .label-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+        .label-content h2 { font-size: 1.9rem; font-weight: 800; color: var(--dark); margin-bottom: 1rem; }
+        .label-content p { color: #555; margin-bottom: 1rem; line-height: 1.8; font-size: 0.95rem; }
+        .label-features { list-style: none; margin-top: 1.2rem; }
+        .label-features li {
+            padding: 0.5rem 0; font-size: 0.92rem; color: #444;
+            display: flex; align-items: flex-start; gap: 0.6rem;
+        }
+        .label-features li::before { content: ''; display: inline-block; width: 8px; height: 8px; background: var(--blue); border-radius: 50%; margin-top: 0.5rem; flex-shrink: 0; }
+        .label-badge {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: var(--white); border-radius: 20px; padding: 3rem 2rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08); text-align: center;
+        }
+        .label-badge-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .label-badge h3 { font-size: 1.3rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem; }
+        .label-badge p { color: var(--gray); font-size: 0.88rem; }
+
+        /* FORMATIONS */
+        .formations-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .formation-card {
+            background: var(--white); border-radius: 16px; padding: 2rem 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: all 0.3s;
+            border: 1px solid #e8ecf0; text-align: center;
+        }
+        .formation-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
+        .formation-icon {
+            width: 56px; height: 56px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1rem; font-size: 1.5rem;
+        }
+        .formation-icon.auto { background: rgba(229,57,53,0.1); }
+        .formation-icon.moto { background: rgba(66,165,245,0.1); }
+        .formation-icon.scooter { background: rgba(229,57,53,0.1); }
+        .formation-icon.remorque { background: rgba(66,165,245,0.1); }
+        .formation-icon.simulateur { background: rgba(229,57,53,0.1); }
+        .formation-icon.code { background: rgba(66,165,245,0.1); }
+        .formation-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem; }
+        .formation-card p { color: var(--gray); font-size: 0.86rem; line-height: 1.7; }
+
+        /* AGENCES */
+        .agences { background: var(--dark); color: var(--white); }
+        .agences .section-title h2 { color: var(--white); }
+        .agences .section-title p { color: rgba(255,255,255,0.65); }
+        .agences-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .agence-card {
+            background: rgba(255,255,255,0.06); border-radius: 16px; padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.08); transition: all 0.3s;
+        }
+        .agence-card:hover { background: rgba(255,255,255,0.1); }
+        .agence-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--blue); }
+        .agence-card p { font-size: 0.9rem; opacity: 0.8; line-height: 1.6; margin-bottom: 0.4rem; }
+        .agence-card .agence-addr { opacity: 0.65; font-size: 0.85rem; }
+
+        /* CPF */
+        .cpf-banner {
+            background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+            border-radius: 16px; padding: 2.5rem; display: flex; align-items: center;
+            justify-content: space-between; gap: 2rem; flex-wrap: wrap; margin-top: 3rem;
+        }
+        .cpf-banner h3 { color: var(--white); font-size: 1.3rem; font-weight: 700; }
+        .cpf-banner p { color: rgba(255,255,255,0.85); font-size: 0.92rem; margin-top: 0.3rem; }
+        .cpf-banner .btn-white {
+            background: var(--white); color: var(--blue-dark); padding: 0.75rem 1.5rem;
+            border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.9rem;
+            transition: all 0.3s; white-space: nowrap;
+        }
+        .cpf-banner .btn-white:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+
+        /* CONTACT */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+        .contact-cards { display: flex; flex-direction: column; gap: 1.2rem; }
+        .contact-card {
+            background: var(--light); border-radius: 12px; padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        .contact-card h4 { font-size: 0.78rem; color: var(--gray); margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .contact-card p { font-size: 1rem; font-weight: 500; color: var(--dark); }
+        .contact-card a { color: var(--dark); text-decoration: none; }
+        .contact-card a:hover { color: var(--red); }
+        .contact-text h2 { font-size: 1.9rem; font-weight: 800; color: var(--dark); margin-bottom: 1rem; }
+        .contact-text p { color: #555; font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark); color: rgba(255,255,255,0.5);
+            padding: 1.5rem 2rem; text-align: center; font-size: 0.78rem;
+        }
+        footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .nav-links, .nav-cta { display: none; }
+            .hamburger { display: block; }
+            .hero-inner { grid-template-columns: 1fr; text-align: center; }
+            .hero h1 { font-size: 2rem; }
+            .hero { min-height: 75vh; padding: 6rem 1.5rem 3rem; }
+            .hero-img { display: none; }
+            .hero-btns { justify-content: center; }
+            .stats-bar { gap: 1.5rem; padding: 1.5rem 1rem; }
+            .stat-num { font-size: 1.4rem; }
+            .formations-grid { grid-template-columns: 1fr; }
+            .label-grid { grid-template-columns: 1fr; }
+            .agences-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .section-title h2 { font-size: 1.7rem; }
+            section { padding: 3.5rem 1.5rem; }
+            .cpf-banner { flex-direction: column; text-align: center; }
+        }
+        .nav-links.show { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); padding: 1rem 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <img src="img/logo.png" alt="Auto Moto École Patricia" class="nav-logo">
+    <ul class="nav-links">
+        <li><a href="#formations">Formations</a></li>
+        <li><a href="#agences">Nos agences</a></li>
+        <li><a href="#label">Label Qualité</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="tel:0629628068" class="nav-cta">06 29 62 80 68</a>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-text">
+            <div class="hero-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                Labellisée École Conduite Qualité
+            </div>
+            <h1>Votre permis avec <span>Patricia</span>, en toute confiance</h1>
+            <p>Auto, moto, scooter et remorque. 4 agences dans le Pas-de-Calais et le Nord. Des moniteurs expérimentés, un simulateur de conduite et le code en ligne pour réussir du premier coup.</p>
+            <div class="hero-btns">
+                <a href="tel:0629628068" class="btn-red">Nous appeler</a>
+                <a href="mailto:contact@autoecolepatricia.fr" class="btn-outline">Nous écrire</a>
+            </div>
+        </div>
+        <div class="hero-img">
+            <img src="img/logo.png" alt="Auto Moto École Patricia">
+        </div>
+    </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+    <div class="stat">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Agences</div>
+    </div>
+    <div class="stat">
+        <div class="stat-num">B / BEA</div>
+        <div class="stat-label">Permis auto</div>
+    </div>
+    <div class="stat">
+        <div class="stat-num">A1 / A2 / A</div>
+        <div class="stat-label">Permis moto</div>
+    </div>
+    <div class="stat">
+        <div class="stat-num">CPF</div>
+        <div class="stat-label">Éligible</div>
+    </div>
+</div>
+
+<!-- FORMATIONS -->
+<section id="formations">
+    <div class="container">
+        <div class="section-title">
+            <h2>Nos formations</h2>
+            <p>Du permis voiture au permis remorque, trouvez la formation qui vous correspond</p>
+            <div class="accent-line"></div>
+        </div>
+        <div class="formations-grid">
+            <div class="formation-card">
+                <div class="formation-icon auto">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E53935" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                </div>
+                <h3>Permis B</h3>
+                <p>Formation classique ou accélérée. Conduite sur Golf 8 et Polo. Conduite accompagnée (AAC) dès 15 ans et conduite supervisée.</p>
+            </div>
+            <div class="formation-card">
+                <div class="formation-icon moto">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#42A5F5" stroke-width="2"><circle cx="18" cy="17" r="3"/><circle cx="6" cy="17" r="3"/><path d="M6 17L9 9h4l3 8"/><path d="M9 9l2-4h2"/></svg>
+                </div>
+                <h3>Permis moto</h3>
+                <p>Formations A1, A2 et passerelle A. Plateau et circulation avec moniteur spécialisé deux-roues.</p>
+            </div>
+            <div class="formation-card">
+                <div class="formation-icon scooter">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E53935" stroke-width="2"><circle cx="18" cy="17" r="3"/><circle cx="6" cy="17" r="3"/><path d="M6 17h12"/><path d="M12 17V7h3l2 5"/></svg>
+                </div>
+                <h3>Permis scooter (AM)</h3>
+                <p>Formation BSR pour conduire un scooter dès 14 ans. 8 heures de formation pratique avec un moniteur.</p>
+            </div>
+            <div class="formation-card">
+                <div class="formation-icon remorque">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#42A5F5" stroke-width="2"><rect x="1" y="6" width="10" height="10" rx="1"/><rect x="13" y="8" width="8" height="8" rx="1"/><line x1="11" y1="12" x2="13" y2="12"/><circle cx="5" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+                </div>
+                <h3>Permis remorque</h3>
+                <p>Formations B96 et BE pour tracter une remorque en toute légalité. Indispensable pour les caravanes et grandes remorques.</p>
+            </div>
+            <div class="formation-card">
+                <div class="formation-icon simulateur">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E53935" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <h3>Simulateur de conduite</h3>
+                <p>Débutez votre apprentissage en toute sécurité sur notre simulateur. Idéal pour appréhender les premiers réflexes sans stress.</p>
+            </div>
+            <div class="formation-card">
+                <div class="formation-icon code">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#42A5F5" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                </div>
+                <h3>Code en ligne</h3>
+                <p>Révisez le code de la route où et quand vous voulez avec Pass Rousseau. Accès illimité pour 40 EUR.</p>
+            </div>
+        </div>
+
+        <!-- CPF -->
+        <div class="cpf-banner">
+            <div>
+                <h3>Financez votre permis avec le CPF</h3>
+                <p>Votre Compte Personnel de Formation peut couvrir tout ou partie de votre permis de conduire.</p>
+            </div>
+            <a href="https://www.moncompteformation.gouv.fr" target="_blank" rel="noopener" class="btn-white">En savoir plus</a>
+        </div>
+    </div>
+</section>
+
+<!-- LABEL QUALITE -->
+<section class="label-section" id="label">
+    <div class="container">
+        <div class="label-grid">
+            <div class="label-content">
+                <h2>Label École Conduite Qualité</h2>
+                <p>Auto Moto École Patricia est labellisée par l'État pour la qualité de ses formations. Ce label garantit un enseignement structuré, transparent et adapté à chaque élève.</p>
+                <ul class="label-features">
+                    <li>Informations claires sur les formations et les tarifs</li>
+                    <li>Suivi pédagogique personnalisé tout au long de la formation</li>
+                    <li>Moniteurs diplômés et régulièrement formés</li>
+                    <li>Véhicules récents et bien entretenus (Golf 8, Polo)</li>
+                    <li>Prise en compte des avis et satisfaction des élèves</li>
+                </ul>
+            </div>
+            <div class="label-badge">
+                <div class="label-badge-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#42A5F5" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <h3>École Conduite Qualité</h3>
+                <p>Label délivré par la Préfectu&#173;re, garantissant le respect de critères exigeants de qualité dans la formation à la conduite.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AGENCES -->
+<section class="agences" id="agences">
+    <div class="container">
+        <div class="section-title">
+            <h2>4 agences à votre service</h2>
+            <p>Retrouvez-nous dans le Pas-de-Calais et le Nord</p>
+            <div class="accent-line"></div>
+        </div>
+        <div class="agences-grid">
+            <div class="agence-card">
+                <h3>Longuenesse</h3>
+                <p>23 Allée des Bruyères</p>
+                <p class="agence-addr">62219 Longuenesse</p>
+            </div>
+            <div class="agence-card">
+                <h3>Lumbres</h3>
+                <p>4 Place Jules Leriche</p>
+                <p class="agence-addr">62380 Lumbres</p>
+            </div>
+            <div class="agence-card">
+                <h3>Watten</h3>
+                <p>47 Rue de Dunkerque</p>
+                <p class="agence-addr">59143 Watten</p>
+            </div>
+            <div class="agence-card">
+                <h3>Saint-Martin-Lez-Tatinghem</h3>
+                <p>30 Rue de Calais</p>
+                <p class="agence-addr">62500 Saint-Martin-Lez-Tatinghem</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="container">
+        <div class="section-title">
+            <h2>Contactez-nous</h2>
+            <p>Une question ? Appelez-nous ou envoyez-nous un message</p>
+            <div class="accent-line"></div>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-text">
+                <h2>Prenez rendez-vous</h2>
+                <p>Notre équipe est disponible pour répondre à toutes vos questions sur nos formations, les tarifs et les modalités d'inscription.</p>
+                <p>Que vous souhaitiez passer le permis voiture, moto, scooter ou remorque, nous vous accompagnons de A à Z dans votre projet.</p>
+                <p>N'hésitez pas à nous contacter pour un premier échange gratuit et sans engagement.</p>
+            </div>
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <h4>Téléphone</h4>
+                    <p><a href="tel:0629628068">06 29 62 80 68</a></p>
+                    <p><a href="tel:0631544461">06 31 54 44 61</a></p>
+                </div>
+                <div class="contact-card">
+                    <h4>Email</h4>
+                    <p><a href="mailto:contact@autoecolepatricia.fr">contact@autoecolepatricia.fr</a></p>
+                </div>
+                <div class="contact-card">
+                    <h4>Code en ligne</h4>
+                    <p>Pass Rousseau — 40 EUR</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>Auto Moto École Patricia — 4 agences : Longuenesse, Lumbres, Watten, Saint-Martin-Lez-Tatinghem</p>
+    <p style="margin-top:0.4rem;">&copy; 2026 Auto Moto École Patricia. Tous droits réservés.</p>
+</footer>
+
+<script>
+document.querySelector('.hamburger').addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.toggle('show');
+});
+</script>
+
+</body>
+</html>
